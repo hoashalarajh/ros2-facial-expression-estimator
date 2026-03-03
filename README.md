@@ -107,8 +107,14 @@ ros2 run rqt_image_view rqt_image_view
 
 ---
 
+## Topic Reference
+
 
 | Topic Name | Message Type | Description |
 | ----------- | ------------ | ------------ |
 | `/video_frames`      | `sensor_msgs/Image`        | Raw RGB video frames from the webcam.       |
 |`/annotated_frames`    | `sensor_msgs/Image`        | Video frames overlaid with the MediaPipe face mesh (for debugging).       |
+|`/facial_expressions` | `std_msgs/String` | A JSON-formatted string containing the dictionary of 52 blendshape names and their current scores (0.0 to 1.0).|
+
+
+
