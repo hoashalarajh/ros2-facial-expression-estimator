@@ -32,5 +32,83 @@ If you don't have a workspace set up, create one and clone this repository into 
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
 git clone <YOUR-GITHUB-REPO-URL-HERE> facial_analysis_pkg
+```
+### 2. Install ROS 2 Dependencies
+Ensure you have the required ROS 2 sensor and vision bridging packages:
+```bash
+sudo apt update
+sudo apt install ros-humble-cv-bridge ros-humble-sensor-msgs
+```
+
+### 3. Install Python Dependencies
+Important Note: To avoid known compatibility crashes with ROS 2 cv_bridge and recent MediaPipe updates, we specifically pin `NumPy` to a `1.x` version and `MediaPipe` to `0.10.21`.
+
+```bash
+pip install opencv-python matplotlib
+pip install --force-reinstall "numpy<2.0"
+pip install --force-reinstall mediapipe==0.10.21
+```
+
+### 4. Download the MediaPipe Model
+The expression_estimator node requires the official `MediaPipe Face Landmarker` model. Download it directly into the root of your ROS 2 workspace:
+
+```bash
+cd ~/ros2_ws
+wget -q -O face_landmarker.task [https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task](https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task)
+```
 
 
+### 5. Build the Workspace
+Compile the package and source the installation:
+
+```bash
+cd ~/ros2_ws
+colcon build --packages-select facial_analysis_pkg
+source install/setup.bash
+```
+
+---
+
+
+🚀 Usage Guide
+To run the complete pipeline, you will need to open four separate terminal windows. Make sure to run all commands from the root of your workspace `(~/ros2_ws)` so the node can find the `face_landmarker.task` model file.
+
+**Terminal 1: Start the Camera Node**
+```bash
+cd ~/ros2_ws
+source install/setup.bash
+ros2 run facial_analysis_pkg camera_publisher
+```
+
+**Terminal 2: Start the AI Estimator Node**
+```bash
+cd ~/ros2_ws
+source install/setup.bash
+ros2 run facial_analysis_pkg expression_estimator
+```
+
+**Terminal 3: Start the Live Bar Chart Visualizer**
+```bash
+cd ~/ros2_ws
+source install/setup.bash
+ros2 run facial_analysis_pkg expression_visualizer
+```
+
+**Terminal 4: View the Face Mesh (Optional)**
+To see the live video feed with the AI face tracking mesh overlaid, use ROS 2's built-in image viewer:
+
+```baah
+cd ~/ros2_ws
+source install/setup.bash
+ros2 run rqt_image_view rqt_image_view
+```
+
+(Select `/annotated_frames` from the drop-down menu in the GUI).
+
+---
+
+
+| Topic Name | Message Type | Description |
+| :----------- | :------------: | ------------: |
+| `/video_frames`      | `sensor_msgs/Image`        | Raw RGB video frames from the webcam.       |
+|`/annotated_frames`    | `sensor_msgs/Image`        | Video frames overlaid with the MediaPipe face mesh (for debugging).       |
