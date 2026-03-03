@@ -12,6 +12,9 @@ The package includes nodes for publishing raw camera data, estimating and publis
 * **`expression_estimator`**: Subscribes to the raw frames, processes them through the MediaPipe neural network, and publishes 52 facial blendshape scores (0.0 to 1.0) to `/facial_expressions`. It also publishes an annotated video feed with a mapped face mesh to `/annotated_frames`.
 * **`expression_visualizer`**: Subscribes to the JSON expression data and displays a live, 10-second moving average bar chart of all expressions using Matplotlib.
 
+<img width="1920" height="1200" alt="Screenshot from 2026-03-03 08-25-33" src="https://github.com/user-attachments/assets/2405cc13-d50a-4c11-9f02-a71ebcd8d57a" />
+
+
 ---
 
 ## Prerequisites
