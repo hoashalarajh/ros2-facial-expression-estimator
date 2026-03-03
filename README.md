@@ -6,7 +6,7 @@ The package includes nodes for publishing raw camera data, estimating and publis
 
 
 
-## 🛠️ System Architecture
+## System Architecture
 
 * **`camera_publisher`**: Captures raw webcam frames using OpenCV and publishes them to `/video_frames`.
 * **`expression_estimator`**: Subscribes to the raw frames, processes them through the MediaPipe neural network, and publishes 52 facial blendshape scores (0.0 to 1.0) to `/facial_expressions`. It also publishes an annotated video feed with a mapped face mesh to `/annotated_frames`.
@@ -14,7 +14,7 @@ The package includes nodes for publishing raw camera data, estimating and publis
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 * **OS:** Ubuntu 22.04
 * **ROS Version:** ROS 2 Humble Hawksbill
@@ -22,7 +22,7 @@ The package includes nodes for publishing raw camera data, estimating and publis
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 Follow these steps to set up the workspace, install specific stable dependencies, and build the project.
 
@@ -70,7 +70,7 @@ source install/setup.bash
 ---
 
 
-🚀 Usage Guide
+# Usage Guide
 To run the complete pipeline, you will need to open four separate terminal windows. Make sure to run all commands from the root of your workspace `(~/ros2_ws)` so the node can find the `face_landmarker.task` model file.
 
 **Terminal 1: Start the Camera Node**
