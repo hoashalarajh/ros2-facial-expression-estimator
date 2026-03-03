@@ -109,6 +109,6 @@ ros2 run rqt_image_view rqt_image_view
 
 
 | Topic Name | Message Type | Description |
-| :----------- | :------------: | ------------: |
+| ----------- | ------------ | ------------ |
 | `/video_frames`      | `sensor_msgs/Image`        | Raw RGB video frames from the webcam.       |
 |`/annotated_frames`    | `sensor_msgs/Image`        | Video frames overlaid with the MediaPipe face mesh (for debugging).       |
